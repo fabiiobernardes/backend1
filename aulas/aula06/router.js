@@ -5,7 +5,8 @@ const express = require("express");
 const router = express.Router();
 
 router.get('/', (req, res)=>{
-    res.send("Listar as tarefas");
+    req.send("Listar as tarefas");
+    res.status(404).send("Tarefa não encontrada");
 });
 
 router.post('/', (req, res)=>{
