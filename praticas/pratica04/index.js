@@ -29,9 +29,11 @@ router.post('/', (req, res)=>{
     res.status(201).send(novaTarefa);
 });
 
-router.get('/:id', (req, res)=>{
-    const { id } = req.params; 
-    res.send(tarefas.find(x => x.id == id));
+router.get('/:id', (req, res) => {
+    const { id } = req.params;
+    const tarefa = tarefas.find(x => x.id == id);
+    if (!tarefa) return res.status(404).send({ erro: "Tarefa não localizada" });
+    res.send(tarefa);
 });
 
 router.put('/:id', (req, res)=>{
@@ -42,9 +44,12 @@ router.put('/:id', (req, res)=>{
 router.delete('/:id', (req, res)=>{
     const { id } = req.params; 
     if (id) return res.status(204).end();
-    throw Error ("Tarefa não encontrada");
+    throw Error ("Tarefa não localizada");
 });
 
+app.use((err, req, res, next)=>{
+    res.status(500).send(err.message);
+});
 
 app.listen(3000, ()=>{
     console.log("App está On!")
