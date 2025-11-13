@@ -15,7 +15,7 @@ paths:
       tags:
         - produtos
       responses:
-        '200':
+        200:
           description: Lista de produtos
           content:
             application/json:
@@ -32,13 +32,13 @@ paths:
             schema:
               $ref: '#/components/schemas/Produto'
       responses:
-        '201':
+        201:
           description: Produto criado com sucesso
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Produto'
-        '422':
+        422:
           description: Nome e preço são obrigatórios
 
   /produtos/{produtoId}:
@@ -53,13 +53,13 @@ paths:
           required: true
           description: Id do produto a ser buscado
       responses:
-        '200':
+        200:
           description: Um JSON com os dados do produto encontrado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Produto'
-        '404':
+        404:
           description: Produto não encontrado
     put:
       tags:
@@ -68,7 +68,7 @@ paths:
         - in: path
           name: produtoId
           schema:
-            type: integer
+            type: string
           required: true
           description: Id do produto a ser atualizado
       requestBody:
@@ -79,15 +79,15 @@ paths:
             schema:
               $ref: '#/components/schemas/Produto'
       responses:
-        '200':
+        200:
           description: Um JSON com os dados do produto atualizado
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Produto'
-        '404':
+        404:
           description: Produto não encontrado
-        '422':
+        422:
           description: Nome e preço são obrigatórios
     delete:
       tags:
@@ -96,13 +96,13 @@ paths:
         - in: path
           name: produtoId
           schema:
-            type: integer
+            type: string
           required: true
           description: Id do produto a ser removido
       responses:
         '204':
           description: Produto removido com sucesso
-        '404':
+        404:
           description: Produto não encontrado
 
 components:
